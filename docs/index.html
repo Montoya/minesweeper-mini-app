@@ -38,13 +38,25 @@
     return result;
   }
 
+  const $ = document.getElementById; 
+
   if(sdk) {
     await sdk.actions.ready();
   }
-  startMinisweeper(document.getElementById("game"),sdk,"https://minesweeper.miniapps.club/");
+  startMinisweeper($("game"),sdk,"https://minesweeper.miniapps.club/");
   if(sdk) { 
-    const nonce = generateRandomAlphanumeric(8); 
-    const result = await sdk.actions.signIn({ nonce });
+    /*const nonce = generateRandomAlphanumeric(8); 
+    const result = await sdk.actions.signIn({ nonce });*/
+
+    if(sdk.context && sdk.context.fid) { 
+      $('identity').textContent = sdk.context.fid; 
+      if(sdk.context.username) { 
+        $('identity').textContent = sdk.context.username; 
+      }
+      if(sdk.context.pfpUrl) { 
+        $('identity').insertAdjacentHTML('afterbegin',"<img src='"+sdk.context.pfpUrl+"' class='pfp'>"); 
+      }
+    }
   }
 </script>
 </body>
