@@ -43,7 +43,7 @@
   if(sdk) {
     await sdk.actions.ready();
   }
-  startMinisweeper($("game"),sdk,"https://minesweeper.miniapps.club/");
+  startMinisweeper(document.getElementById('game'),sdk,"https://minesweeper.miniapps.club/");
   if(sdk) { 
     /*const nonce = generateRandomAlphanumeric(8); 
     const result = await sdk.actions.signIn({ nonce });*/
