@@ -45,7 +45,6 @@
   if(sdk) { 
     const nonce = generateRandomAlphanumeric(8); 
     const result = await sdk.actions.signIn({ nonce });
-    document.getElementById('identity').textContent = JSON.stringify(result); 
   }
 </script>
 </body>
