@@ -28,10 +28,25 @@
 <script type="module">
   import { ethers } from "./ethers.min.js"
   import { sdk } from "https://esm.sh/@farcaster/frame-sdk"
+
+  function generateRandomAlphanumeric(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+
   if(sdk) {
     await sdk.actions.ready();
   }
   startMinisweeper(document.getElementById("game"),sdk,"https://minesweeper.miniapps.club/");
+  if(sdk) { 
+    const nonce = generateRandomAlphanumeric(8); 
+    const result = await sdk.actions.signIn({ nonce });
+    document.getElementById('identity').textContent = JSON.stringify(result); 
+  }
 </script>
 </body>
 </html>
