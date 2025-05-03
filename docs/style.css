@@ -77,6 +77,8 @@ body {
   top:12px;
   right:12px; 
   width:auto; 
+  line-height:24px; 
+  vertical-align:middle;
 }
 img.pfp { 
   width:24px;
