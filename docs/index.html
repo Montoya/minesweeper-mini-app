@@ -39,11 +39,12 @@
   }
 
   const $ = document.getElementById; 
+  const gameElement = $('game'); 
 
   if(sdk) {
     await sdk.actions.ready();
   }
-  startMinisweeper(document.getElementById('game'),sdk,"https://minesweeper.miniapps.club/");
+  startMinisweeper(gameElement,sdk,"https://minesweeper.miniapps.club/");
   if(sdk) { 
     /*const nonce = generateRandomAlphanumeric(8); 
     const result = await sdk.actions.signIn({ nonce });*/
