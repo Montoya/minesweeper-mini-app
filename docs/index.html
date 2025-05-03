@@ -42,7 +42,7 @@
     if(!sdk) return; 
     var context = await sdk.context; 
 
-    if(context.user && context.user.username) { 
+    if(context.user!==undefined && context.user.username) { 
       document.getElementById('identity').textContent = `@${context.user.username}`; 
       if(context.user.pfpUrl) { 
         document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+context.user.pfpUrl+"' class='pfp'>"); 
