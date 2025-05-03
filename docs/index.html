@@ -41,8 +41,9 @@
   function displayIdentity() { 
     
     if(sdk.context) { 
+      console.log(sdk.context); 
       if(sdk.context.user && sdk.context.user.fid) { 
-        document.getElementById('identity').textContent = ''+sdk.context.user.fid; 
+        document.getElementById('identity').textContent = `${sdk.context.user.fid}`; 
         if(sdk.context.user.username) { 
           document.getElementById('identity').textContent = `${sdk.context.user.username}`; 
         }
@@ -65,12 +66,11 @@
       displayIdentity();
     }
   }
-
+  startMinisweeper(document.getElementById('game'),sdk,"https://minesweeper.miniapps.club/");
   if(sdk) {
     await sdk.actions.ready();
+    displayIdentity(); 
   }
-  startMinisweeper(document.getElementById('game'),sdk,"https://minesweeper.miniapps.club/");
-  displayIdentity(); 
 </script>
 </body>
 </html>
