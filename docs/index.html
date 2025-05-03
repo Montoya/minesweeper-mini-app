@@ -38,24 +38,38 @@
     return result;
   }
 
+  function displayIdentity() { 
+    if(sdk) { 
+      if(sdk.context && sdk.context.fid) { 
+        document.getElementById('identity').textContent = sdk.context.fid; 
+        if(sdk.context.username) { 
+          document.getElementById('identity').textContent = sdk.context.username; 
+        }
+        if(sdk.context.pfpUrl) { 
+          document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+sdk.context.pfpUrl+"' class='pfp'>"); 
+        }
+      }
+      else { 
+        document.getElementById('identity').insertAdjacentHTML('beforeend',"<a href='#' class='btn' onclick='auth();return false'>Sign in</a>"); 
+      }
+    }
+  }
+
+  async function auth(e) { 
+    e.stopPropagation(); 
+    e.preventDefault(); 
+    if(sdk) { 
+      const nonce = generateRandomAlphanumeric(8); 
+      const result = await sdk.actions.signIn({ nonce });
+      displayIdentity();
+    }
+  }
+
   if(sdk) {
     await sdk.actions.ready();
   }
   startMinisweeper(document.getElementById('game'),sdk,"https://minesweeper.miniapps.club/");
-  if(sdk) { 
-    /*const nonce = generateRandomAlphanumeric(8); 
-    const result = await sdk.actions.signIn({ nonce });*/
-
-    if(sdk.context && sdk.context.fid) { 
-      document.getElementById('identity').textContent = sdk.context.fid; 
-      if(sdk.context.username) { 
-        document.getElementById('identity').textContent = sdk.context.username; 
-      }
-      if(sdk.context.pfpUrl) { 
-        document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+sdk.context.pfpUrl+"' class='pfp'>"); 
-      }
-    }
-  }
+  displayIdentity(); 
 </script>
 </body>
 </html>

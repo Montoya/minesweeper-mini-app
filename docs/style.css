@@ -54,7 +54,7 @@ body {
   justify-content:space-between;
   padding-bottom:0.75rem;
 }
-#container a { 
+#container a, a.btn { 
   color:#7c65c1; 
   cursor:pointer;
   border:1px solid #7c65c1;
@@ -64,7 +64,7 @@ body {
   line-height:1.5; 
   text-decoration:none;
 }
-#container a:hover { 
+#container a:hover, a.btn:hover { 
   background-color:#7c65c1;
   color:#fff; 
 }
