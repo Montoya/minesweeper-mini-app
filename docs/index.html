@@ -40,14 +40,13 @@
 
   function displayIdentity() { 
     if(sdk) { 
-      console.log(sdk.context); 
-      if(sdk.context && sdk.context.fid) { 
-        document.getElementById('identity').textContent = `${sdk.context.fid}`;
-        if(sdk.context.username && sdk.context.username.length>0) { 
-          document.getElementById('identity').textContent = `${sdk.context.username}`; 
+      if(sdk.context && sdk.context.user && sdk.context.user.fid) { 
+        document.getElementById('identity').textContent = `${sdk.context.user.fid}`;
+        if(sdk.context.user.username) { 
+          document.getElementById('identity').textContent = `${sdk.context.user.username}`; 
         }
-        if(sdk.context.pfpUrl && sdk.context.pfpUrl.length>0) { 
-          document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+sdk.context.pfpUrl+"' class='pfp'>"); 
+        if(sdk.context.user.pfpUrl) { 
+          document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+sdk.context.user.pfpUrl+"' class='pfp'>"); 
         }
       }
       else { 
