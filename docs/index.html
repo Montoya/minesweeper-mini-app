@@ -25,57 +25,13 @@
   <div id="identity"></div>
 
 <script type="text/javascript" src="minisweeper.js"></script>
+<script type="text/javascript" src="miniauth.js"></script>
 <script type="module">
-  import { ethers } from "./ethers.min.js"
-  import { sdk } from "https://esm.sh/@farcaster/frame-sdk"
+  import { ethers } from "./ethers.min.js";
+  import { sdk } from "https://esm.sh/@farcaster/frame-sdk";
 
-  const isSDKLoaded = sdk.context ? true : false;
-
-  console.log('sdkloaded',isSDKLoaded); 
-
-  function generateRandomAlphanumeric(length) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-  }
-
-  function displayIdentity() { 
-    
-    if(sdk.context) { 
-      console.log(sdk.context); 
-      if(sdk.context.user && sdk.context.user.fid) { 
-        // document.getElementById('identity').textContent = `${sdk.context.user.fid}`; 
-        if(sdk.context.user.username) { 
-          document.getElementById('identity').textContent = `${sdk.context.user.username}`; 
-        }
-        if(sdk.context.user.pfpUrl) { 
-          document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+sdk.context.user.pfpUrl+"' class='pfp'>"); 
-        }
-      }
-    }
-    else { 
-      document.getElementById('identity').insertAdjacentHTML('beforeend',"<a href='#' class='btn' onclick='auth();return false'>Sign in</a>"); 
-    }
-  }
-
-  async function auth(e) { 
-    e.stopPropagation(); 
-    e.preventDefault(); 
-    if(sdk) { 
-      const nonce = generateRandomAlphanumeric(8); 
-      const result = await sdk.actions.signIn({ nonce });
-      displayIdentity();
-    }
-  }
-
+  await sdk.actions.ready();
   startMinisweeper(document.getElementById('game'),sdk,"https://minesweeper.miniapps.club/");
-  if(isSDKLoaded) {
-    await sdk.actions.ready();
-    displayIdentity(); 
-  }
 </script>
 </body>
 </html>

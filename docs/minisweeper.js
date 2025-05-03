@@ -427,4 +427,44 @@ const startMinisweeper = (element, sdk, appUrl) => {
       } catch(err) { }
     }
   },100); 
+  displayIdentity(); 
+}
+
+function generateRandomAlphanumeric(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
+function displayIdentity() { 
+  if(!farcasterSDK) return; 
+
+  if(farcasterSDK.context) { 
+    if(farcasterSDK.context.user && farcasterSDK.context.user.fid) { 
+      document.getElementById('identity').textContent = `${farcasterSDK.context.user.fid}`; 
+      if(farcasterSDK.context.user.username) { 
+        document.getElementById('identity').textContent = `${farcasterSDK.context.user.username}`; 
+      }
+      if(farcasterSDK.context.user.pfpUrl) { 
+        document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+farcasterSDK.context.user.pfpUrl+"' class='pfp'>"); 
+      }
+    }
+  }
+  else { 
+    document.getElementById('identity').insertAdjacentHTML('beforeend',"<a href='#' class='btn' onclick='auth();return false'>Sign in</a>"); 
+  }
+}
+
+async function auth(e) { 
+  e.stopPropagation(); 
+  e.preventDefault(); 
+  if(farcasterSDK) { 
+    const nonce = generateRandomAlphanumeric(8); 
+    const result = await farcasterSDK.actions.signIn({ nonce });
+    displayIdentity();
+  }
+  return false; 
 }
