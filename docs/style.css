@@ -78,7 +78,6 @@ body {
   right:12px; 
   width:auto; 
   line-height:24px; 
-  vertical-align:middle;
 }
 img.pfp { 
   width:24px;
@@ -87,4 +86,5 @@ img.pfp {
   display:inline-block;
   margin-right:12px; 
   vertical-align:middle;
+  margin-top:-6px;
 }
