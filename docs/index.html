@@ -29,6 +29,43 @@
   import { ethers } from "./ethers.min.js";
   import { sdk } from "https://esm.sh/@farcaster/frame-sdk";
 
+  function generateRandomAlphanumeric(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+
+  async function displayIdentity() { 
+    if(!sdk) return; 
+    var context = await sdk.context; 
+
+    if(context.user && context.user.username) { 
+      document.getElementById('identity').textContent = `${context.user.username}`; 
+      if(context.user.pfpUrl) { 
+        document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+context.user.pfpUrl+"' class='pfp'>"); 
+      }
+    }
+    else { 
+      document.getElementById('identity').insertAdjacentHTML('beforeend',"<a href='#' class='btn' onclick='auth();return false'>Sign in</a>"); 
+    }
+  }
+
+  async function auth() { 
+    if(sdk) { 
+      const nonce = generateRandomAlphanumeric(8); 
+      const result = await sdk.actions.signIn({ nonce });
+      document.getElementById('identity').textContent = ''; 
+      await displayIdentity();
+    }
+    else { 
+      alert("Farcaster SDK not found"); 
+    }
+    return false; 
+  }
+
   await sdk.actions.ready();
   startMinisweeper(document.getElementById('game'),sdk,"https://minesweeper.miniapps.club/");
 </script>

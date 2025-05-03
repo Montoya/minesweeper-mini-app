@@ -427,42 +427,4 @@ const startMinisweeper = (element, sdk, appUrl) => {
       } catch(err) { }
     }
   },100); 
-  displayIdentity(); 
-}
-
-function generateRandomAlphanumeric(length) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-}
-
-async function displayIdentity() { 
-  if(!farcasterSDK) return; 
-  var context = await farcasterSDK.context; 
-
-  if(context.user && context.user.username) { 
-    document.getElementById('identity').textContent = `${context.user.username}`; 
-    if(context.user.pfpUrl) { 
-      document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+context.user.pfpUrl+"' class='pfp'>"); 
-    }
-  }
-  else { 
-    document.getElementById('identity').insertAdjacentHTML('beforeend',"<a href='#' class='btn' onclick='auth();return false'>Sign in</a>"); 
-  }
-}
-
-async function auth() { 
-  if(farcasterSDK) { 
-    const nonce = generateRandomAlphanumeric(8); 
-    const result = await farcasterSDK.actions.signIn({ nonce });
-    document.getElementById('identity').textContent = ''; 
-    await displayIdentity();
-  }
-  else { 
-    alert("Farcaster SDK not found"); 
-  }
-  return false; 
 }
