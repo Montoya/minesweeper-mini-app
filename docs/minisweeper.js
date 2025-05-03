@@ -454,13 +454,14 @@ function displayIdentity() {
   }
 }
 
-async function auth(e) { 
-  e.stopPropagation(); 
-  e.preventDefault(); 
+async function auth() { 
   if(farcasterSDK) { 
     const nonce = generateRandomAlphanumeric(8); 
     const result = await farcasterSDK.actions.signIn({ nonce });
     displayIdentity();
+  }
+  else { 
+    alert("Farcaster SDK not found"); 
   }
   return false; 
 }
