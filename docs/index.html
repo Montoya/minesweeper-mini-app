@@ -41,9 +41,11 @@
   function displayIdentity() { 
     if(sdk) { 
       if(sdk.context && sdk.context.fid) { 
-        document.getElementById('identity').textContent = ''+sdk.context.fid; 
+        const fid = {...sdk.context.fid}; 
+        document.getElementById('identity').textContent = JSON.stringify(fid); 
         if(sdk.context.username) { 
-          document.getElementById('identity').textContent = ''+sdk.context.username; 
+          const username = {...sdk.context.username}; 
+          document.getElementById('identity').textContent = JSON.stringify(username); 
         }
         if(sdk.context.pfpUrl) { 
           document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+sdk.context.pfpUrl+"' class='pfp'>"); 
