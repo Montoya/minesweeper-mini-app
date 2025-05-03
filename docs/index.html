@@ -40,7 +40,8 @@
 
   function displayIdentity() { 
     if(sdk) { 
-      if(sdk.context && sdk.context.fid && parseInt(sdk.context.fid)>0) { 
+      console.log(sdk.context); 
+      if(sdk.context && sdk.context.fid) { 
         document.getElementById('identity').textContent = `${sdk.context.fid}`;
         if(sdk.context.username && sdk.context.username.length>0) { 
           document.getElementById('identity').textContent = `${sdk.context.username}`; 
