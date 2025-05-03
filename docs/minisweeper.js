@@ -249,7 +249,13 @@ const displayBoard = (element, board, marks, outcome) => {
     document.getElementById('shareOutcomeButton').addEventListener('click',function(e) {
       if(!farcasterSDK || !appURL) return false; 
       const shareText = outcome=="win" ? `I just won a game of Minesweeper in ${parseInt(minisweeperState.timer/1000)}.${parseInt(minisweeperState.timer%1000)} seconds${minisweeperState.stats.fastest===minisweeperState.timer ? ' (my best time so far!)' : ''} 😎 Want to try? Play below 👇` : `I just lost a game of Minesweeper 😭 Think you can do better? Play below 👇`; 
-      farcasterSDK.actions.openUrl(`https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${appURL}`); 
+      // farcasterSDK.actions.openUrl(`https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${appURL}`); 
+      farcasterSDK.actions.composeCast({ 
+        text: shareText,
+        embeds: [`${appURL}`],
+        parent: null,
+        close: false
+      });
       return false; 
     }); 
 
@@ -357,7 +363,12 @@ const shareStats = () => {
   if(minisweeperState.stats.fastest) { 
     shareText = `${shareText} Fastest win: ${parseInt(minisweeperState.stats.fastest/1000)}.${parseInt(minisweeperState.stats.fastest%1000)}s!`; 
   }
-  farcasterSDK.actions.openUrl(`https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${appURL}`); 
+  farcasterSDK.actions.composeCast({ 
+    text: shareText,
+    embeds: [`${appURL}`],
+    parent: null,
+    close: false
+  });
   return false; 
 }
 
