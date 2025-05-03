@@ -49,6 +49,7 @@
       }
     }
     else { 
+      document.getElementById('identity').textContent = ''; 
       document.getElementById('identity').insertAdjacentHTML('beforeend',"<a href='#' class='btn' onclick='auth();return false'>Sign in</a>"); 
     }
   }
