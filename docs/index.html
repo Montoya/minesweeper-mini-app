@@ -41,9 +41,9 @@
   function displayIdentity() { 
     if(sdk) { 
       if(sdk.context && sdk.context.fid) { 
-        document.getElementById('identity').textContent = sdk.context.fid; 
+        document.getElementById('identity').textContent = ''+sdk.context.fid; 
         if(sdk.context.username) { 
-          document.getElementById('identity').textContent = sdk.context.username; 
+          document.getElementById('identity').textContent = ''+sdk.context.username; 
         }
         if(sdk.context.pfpUrl) { 
           document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+sdk.context.pfpUrl+"' class='pfp'>"); 
