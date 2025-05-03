@@ -40,11 +40,10 @@
 
   function displayIdentity() { 
     
-    if(sdk) { 
-      console.log("HELLO"); 
-      if(sdk.context && sdk.context.user && sdk.context.user.fid) { 
+    if(sdk.context) { 
+      if(sdk.context.user && sdk.context.user.fid) { 
         console.log(sdk.context.user.fid); 
-        // document.getElementById('identity').textContent = ''+fid; 
+        document.getElementById('identity').textContent = ''+fid; 
         if(sdk.context.user.username) { 
           document.getElementById('identity').textContent = `${sdk.context.user.username}`; 
         }
@@ -52,9 +51,9 @@
           document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+sdk.context.user.pfpUrl+"' class='pfp'>"); 
         }
       }
-      else { 
-        document.getElementById('identity').insertAdjacentHTML('beforeend',"<a href='#' class='btn' onclick='auth();return false'>Sign in</a>"); 
-      }
+    }
+    else { 
+      document.getElementById('identity').insertAdjacentHTML('beforeend',"<a href='#' class='btn' onclick='auth();return false'>Sign in</a>"); 
     }
   }
 
