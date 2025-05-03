@@ -39,8 +39,9 @@
   }
 
   function displayIdentity() { 
-    console.log("HELLO"); 
+    
     if(sdk) { 
+      console.log("HELLO"); 
       if(sdk.context && sdk.context.user && sdk.context.user.fid) { 
         document.getElementById('identity').textContent = `${sdk.context.user.fid}`;
         if(sdk.context.user.username) { 
