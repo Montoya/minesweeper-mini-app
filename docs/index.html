@@ -29,6 +29,8 @@
   import { ethers } from "./ethers.min.js"
   import { sdk } from "https://esm.sh/@farcaster/frame-sdk"
 
+  const isSDKLoaded = sdk.context ? true : false;
+
   function generateRandomAlphanumeric(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -66,8 +68,9 @@
       displayIdentity();
     }
   }
+
   startMinisweeper(document.getElementById('game'),sdk,"https://minesweeper.miniapps.club/");
-  if(sdk) {
+  if(isSDKLoaded) {
     await sdk.actions.ready();
     displayIdentity(); 
   }
