@@ -439,9 +439,9 @@ function generateRandomAlphanumeric(length) {
   return result;
 }
 
-function displayIdentity() { 
+async function displayIdentity() { 
   if(!farcasterSDK) return; 
-  var context = {...farcasterSDK.context}; 
+  var context = await farcasterSDK.context; 
 
   if(context.user && context.user.username) { 
     document.getElementById('identity').textContent = `${context.user.username}`; 
@@ -458,7 +458,8 @@ async function auth() {
   if(farcasterSDK) { 
     const nonce = generateRandomAlphanumeric(8); 
     const result = await farcasterSDK.actions.signIn({ nonce });
-    displayIdentity();
+    document.getElementById('identity').textContent = ''; 
+    await displayIdentity();
   }
   else { 
     alert("Farcaster SDK not found"); 
