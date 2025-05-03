@@ -43,8 +43,8 @@
     if(sdk) { 
       console.log("HELLO"); 
       if(sdk.context && sdk.context.user && sdk.context.user.fid) { 
-        const fid = Number(sdk.context.user.fid); 
-        document.getElementById('identity').textContent = ''+fid; 
+        console.log(sdk.context.user.fid); 
+        // document.getElementById('identity').textContent = ''+fid; 
         if(sdk.context.user.username) { 
           document.getElementById('identity').textContent = `${sdk.context.user.username}`; 
         }
