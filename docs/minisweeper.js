@@ -441,16 +441,12 @@ function generateRandomAlphanumeric(length) {
 
 function displayIdentity() { 
   if(!farcasterSDK) return; 
+  var context = {...farcasterSDK.context}; 
 
-  if(farcasterSDK.context) { 
-    if(farcasterSDK.context.user && farcasterSDK.context.user.fid) { 
-      document.getElementById('identity').textContent = `${farcasterSDK.context.user.fid}`; 
-      if(farcasterSDK.context.user.username) { 
-        document.getElementById('identity').textContent = `${farcasterSDK.context.user.username}`; 
-      }
-      if(farcasterSDK.context.user.pfpUrl) { 
-        document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+farcasterSDK.context.user.pfpUrl+"' class='pfp'>"); 
-      }
+  if(context.user && context.user.username) { 
+    document.getElementById('identity').textContent = `${context.user.username}`; 
+    if(context.user.pfpUrl) { 
+      document.getElementById('identity').insertAdjacentHTML('afterbegin',"<img src='"+context.user.pfpUrl+"' class='pfp'>"); 
     }
   }
   else { 
