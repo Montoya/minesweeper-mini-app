@@ -42,8 +42,7 @@
     
     if(sdk.context) { 
       if(sdk.context.user && sdk.context.user.fid) { 
-        console.log(sdk.context.user.fid); 
-        document.getElementById('identity').textContent = ''+fid; 
+        document.getElementById('identity').textContent = ''+sdk.context.user.fid; 
         if(sdk.context.user.username) { 
           document.getElementById('identity').textContent = `${sdk.context.user.username}`; 
         }
