@@ -12,6 +12,11 @@
     "imageUrl": "https://minesweeper.miniapps.club/og-image.png",
     "buttonTitle": "💣 Play 😎",
     "splashImageUrl": "https://minesweeper.miniapps.club/splash.png",
-    "splashBackgroundColor": "#ffffff"
+    "splashBackgroundColor": "#ffffff",
+    "primaryCategory": "games",
+    "tags": ["game","minesweeper","puzzle","casual","fun"],
+    "tagline": "The classic puzzle game in a mini app!",
+    "subtitle": "The classic puzzle game",
+    "description": "Are you brave enough to click?"
   }
 }
